@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ให้คุณเตื้องครับ🌸</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;600&display=swap&subset=thai"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-gradient: linear-gradient(135deg, #ffeef8 0%, #eef3ff 100%);
+        --btn-color: #ff7eb9;
+        --btn-hover: #ff5caa;
+        --text-dark: #4a4a4a;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: var(--bg-gradient);
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+      }
+
+      .happy-button {
+        font-family: "Itim", cursive, sans-serif;
+        background-color: var(--btn-color);
+        color: white;
+        border: none;
+        padding: 20px 40px;
+        font-size: 1.6rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(255, 126, 185, 0.4);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background-color 0.2s ease;
+        user-select: none;
+        outline: none;
+      }
+
+      .happy-button:hover {
+        background-color: var(--btn-hover);
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(255, 126, 185, 0.5);
+      }
+
+      .happy-button:active {
+        transform: scale(0.95);
+      }
+
+      .message-box {
+        margin-top: 3rem;
+        min-height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .message-text {
+        font-family: "Mali", cursive, sans-serif;
+        font-size: 1.8rem;
+        color: var(--text-dark);
+        line-height: 1.5;
+        font-weight: 600;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.3s ease;
+      }
+
+      .giggle-active {
+        opacity: 1;
+        animation: giggle 0.6s ease-in-out forwards;
+      }
+
+      @keyframes giggle {
+        0% {
+          transform: scale(0.3) translateY(0) rotate(0deg);
+        }
+        30% {
+          transform: scale(1.1) translateY(-15px) rotate(-3deg);
+        }
+        50% {
+          transform: scale(0.98) translateY(5px) rotate(3deg);
+        }
+        70% {
+          transform: scale(1.02) translateY(-3px) rotate(-1deg);
+        }
+        100% {
+          transform: scale(1) translateY(0) rotate(0deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button class="happy-button" id="joyBtn">กดปุ่มหน่อยนะครับ 😊</button>
+      <div class="message-box">
+        <div class="message-text" id="msgTarget"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+      const messages = [
+        "วันนี้เหนื่อยมั้ย อย่าลืมพักหายใจด้วยนะครับ แล้วเดี๋ยวเราไปหาอะไรอร่อยๆเติมพลังกันนะ",
+        "งานเยอะแน่ๆเลย ทำงานสู้ๆนะครับ อ่ะ นี่ 🌹 กำลังใจสำหรับคนเก่งมาส่งแล้วครับ",
+        "เธอเก่งที่สุดในโลกเลยนะ รู้มั้ย? 💖",
+        "ถ้ามีอะไรอยากบ่น หูเค้าอยู่นี่นะ👂",
+        "อยากปักตะกร้าแล้วก็บอกนะครับ เดี๋ยวเอาบัตรให้💸💸💳",
+        "ขอบคุณที่มาส่องแสงให้ชีวิตเค้านะครับ แม่ดอกทานตะวัน🌻",
+        "ยิ้มเยอะๆ นะครับ รอยยิ้มของเตื้องทำให้โลกของโปรดน่าอยู่ที่สุดเลยนะ",
+        "คุณเตื้องเก่งมากๆเลยนะครับ เค้ารู้ว่าช่วงนี้อาจจะมีอะไรให้เธอคิดเยอะแยะเต็มไปหมด\nแต่ก็อย่าลืมนะว่ามีเค้าอยู่ข้างๆเสมอ I'm all ears!!✨",
+        "ห้ามแบกอะไรหนักๆไว้ในหัวคนเดียวนะครับ ตัวเธอนิดเดียวเอง อย่าลืมแบ่งมาให้เค้าช่วยแบกบ้างนะะ",
+        "เค้ามีเพลงให้ด้วยนะ คัดลอกไปแปะได้เลยย\n👉: https://surl.li/vkdtfz",
+        "Thank you for being with me kub",
+        "ไปทะเลกันมั้ยครับ? ไม่ใช่คำถามแต่เป็นคำชวน ป่ะ ไปทะเลกันนะะ เสร็จแล้วก็ไปสวนสัตว์ต่อด้วยกันนะครับบ",
+      ];
+
+      const finalMessage =
+        "เย้! เตื้องอ่านครบทุกข้อความที่เค้าตั้งใจเขียนให้แล้วนะ หวังว่าจะช่วยให้เธอยิ้มได้บ้างนะครับ ถ้ายังยิ้มไม่ออกหรือกดเร็วไปหน่อยก็กดวนอ่านอีกรอบได้ตลอดเลยนะ รักเตื้องที่สุด สุขสันต์วันครบรอบนะครับที่รัก 👑💕";
+
+      let currentIndex = 0;
+      let isFinished = false;
+
+      const joyBtn = document.getElementById("joyBtn");
+      const msgTarget = document.getElementById("msgTarget");
+
+      joyBtn.addEventListener("click", () => {
+        let chosenMessage = "";
+
+        if (isFinished) {
+          currentIndex = 0;
+          isFinished = false;
+        }
+
+        if (currentIndex < messages.length) {
+          chosenMessage = messages[currentIndex];
+          currentIndex++;
+        } else {
+          chosenMessage = finalMessage;
+          isFinished = true;
+        }
+
+        msgTarget.classList.remove("giggle-active");
+        void msgTarget.offsetWidth;
+
+        msgTarget.innerText = chosenMessage;
+        msgTarget.classList.add("giggle-active");
+
+        confetti({
+          particleCount: isFinished ? 80 : 40,
+          spread: isFinished ? 100 : 60,
+          origin: { y: 0.6 },
+          colors: ["#ff7eb9", "#ffb7b2", "#ffdac1", "#e2f0cb", "#b5ead7"],
+          disableForReducedMotion: true,
+        });
+      });
+    </script>
+  </body>
+</html>
